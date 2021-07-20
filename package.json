@@ -1,6 +1,6 @@
 {
   "name": "react-week-planner",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "description": "A React week events planner component",
   "author": "Franck Mamboue",
@@ -35,10 +35,9 @@
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "tsc -w",
+    "dev": "react-scripts start",
+    "prepack": "tsc --noEmit false"
   },
   "eslintConfig": {
     "extends": [
