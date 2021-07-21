@@ -1,6 +1,6 @@
 {
   "name": "react-week-planner",
-  "version": "0.1.9",
+  "version": "0.1.11",
   "license": "MIT",
   "description": "A React week events planner component",
   "author": "Franck Mamboue",
@@ -14,8 +14,16 @@
     "calendar"
   ],
   "private": false,
-  "main": "dist/index.ts",
-  "module": "dist/index.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "typings": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/esm/index.js"
+    }
+  },
   "files": [
     "dist"
   ],
@@ -37,9 +45,10 @@
   "scripts": {
     "start": "tsc -w",
     "dev": "react-scripts start",
-    "prepack": "rm -rf dist && yarn build:types && yarn build:js",
-    "build:types": "tsc --emitDeclarationOnly",
-    "build:js": "babel src/lib --out-dir lib --extensions \".ts,.tsx\" --source-maps inline"
+    "prepack": "rm -rf dist && yarn build:esm && yarn build:cjs && yarn build:types",
+    "build:esm": "babel src/lib --extensions .ts,.tsx -d dist/esm --source-maps",
+    "build:cjs": "babel src/lib --extensions .ts,.tsx -d dist/cjs --source-maps",
+    "build:types": "tsc --emitDeclarationOnly --declaration --declarationDir dist/types"
   },
   "eslintConfig": {
     "extends": [
