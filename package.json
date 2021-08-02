@@ -32,7 +32,6 @@
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "date-fns": "^2.22.1",
-    "focus-visible": "^5.2.0",
     "formik": "^2.2.9",
     "framer-motion": "^4.1.17",
     "react-icons": "^4.2.0",
@@ -42,7 +41,6 @@
   },
   "scripts": {
     "start": "tsc -w",
-    "dev": "react-scripts start",
     "prepack": "rm -rf dist && yarn build:esm && yarn build:cjs && yarn build:types",
     "build:esm": "babel src/lib --extensions .ts,.tsx -d dist/esm --source-maps",
     "build:cjs": "babel src/lib --extensions .ts,.tsx -d dist/cjs --source-maps",
@@ -52,18 +50,6 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
     ]
   },
   "devDependencies": {
