@@ -22,6 +22,7 @@ export interface WeekEventInput extends Omit<WeekEvent, 'id'> {
 }
 
 export interface WeekPlannerConfig {
+  weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6
   timeslotHeight: number
   calendarGripGap: number
   padding: number
@@ -64,6 +65,7 @@ export const weekPlannerStrings = {
 }
 
 export const defaultConfig: WeekPlannerConfig = {
+  weekStartsOn: 0,
   isLoading: false,
   isSkeleton: false,
   minuteIndicator: false,

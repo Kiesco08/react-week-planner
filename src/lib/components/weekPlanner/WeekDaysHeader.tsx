@@ -24,16 +24,16 @@ const WeekDaysHeader = forwardRef(
     { gap, date, config = defaultConfig, scrollTimeTable }: WeekDaysHeaderProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
+    const { spacing, minWidth, weekStartsOn } = config
     const { data: days } = useSWR('weekDays', () => {
-      return weekDays(date)
+      return weekDays(date, weekStartsOn)
     })
     const [_days, setDays] = useState(days || [])
-    const { spacing, minWidth } = config
     const longestHourLabel = '12 AM'
 
     useEffect(() => {
-      setDays(weekDays(date))
-    }, [date])
+      setDays(weekDays(date, weekStartsOn))
+    }, [date, weekStartsOn])
 
     return (
       <Flex>

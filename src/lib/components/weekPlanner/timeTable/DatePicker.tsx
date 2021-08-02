@@ -28,7 +28,7 @@ const DatePicker = ({
   onDate,
   config = defaultConfig,
 }: DatePickerProps) => {
-  const { calendarGripGap, spacing, background, padding } = config
+  const { calendarGripGap, spacing, background, padding, weekStartsOn } = config
   const gap = `${calendarGripGap}px`
   const [_date, setDate] = useState(new Date(date))
   const [selectedDate, selectDate] = useState(new Date(date))
@@ -75,7 +75,7 @@ const DatePicker = ({
   }
 
   const WeekDaysHeader = () => {
-    const days = weekDays(_date)
+    const days = weekDays(_date, weekStartsOn)
     return (
       <Flex>
         <SimpleGrid columns={7} gap={gap} flex={1}>
@@ -96,7 +96,7 @@ const DatePicker = ({
       <WeekDaysHeader />
       <Spacer height={spacing / 2} />
       <SimpleGrid flex={1} columns={7} gap={gap}>
-        {monthDays(_date).map((day) => {
+        {monthDays(_date, weekStartsOn).map((day) => {
           return (
             <Center
               key={`${day.raw}`}

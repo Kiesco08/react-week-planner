@@ -50,7 +50,7 @@ const App: React.FC = () => {
         events={events}
         setEvents={setEvents}
         setWeekStart={() => {}}
-        config={{ ...defaultConfig, eventTypes }}
+        config={{ ...defaultConfig, eventTypes, weekStartsOn: 1 }}
       />
     </ChakraProvider>
   )

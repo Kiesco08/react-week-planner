@@ -10,18 +10,27 @@ import {
   Spacer,
 } from '@chakra-ui/react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
-import { format, add, startOfWeek } from 'date-fns'
+import { format, add } from 'date-fns'
+import { startOfWeek } from './utils/weekHelper'
+import { defaultConfig, WeekPlannerConfig } from './utils/WeekPlannerConfig'
 
 interface DateNavigatorProps {
   date: Date
   setDate: (date: Date) => void
   setWeekStart?: (weekStart: Date) => void
+  config?: WeekPlannerConfig
 }
 
-const DateNavigator = ({ date, setDate, setWeekStart }: DateNavigatorProps) => {
+const DateNavigator = ({
+  date,
+  setDate,
+  setWeekStart,
+  config = defaultConfig,
+}: DateNavigatorProps) => {
+  const { weekStartsOn } = config
   const updateDates = (newDate: Date) => {
     setDate(newDate)
-    if (setWeekStart) setWeekStart(startOfWeek(newDate))
+    if (setWeekStart) setWeekStart(startOfWeek(newDate, weekStartsOn))
   }
   return (
     <Box>

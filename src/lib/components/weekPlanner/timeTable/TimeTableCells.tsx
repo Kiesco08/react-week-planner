@@ -35,8 +35,14 @@ const TimeTableCells = ({
   gap,
   config = defaultConfig,
 }: TimeTableCellsProps) => {
-  const { timeslotHeight, eventTypes, minuteIndicator, isSkeleton, isLoading } =
-    config
+  const {
+    timeslotHeight,
+    eventTypes,
+    minuteIndicator,
+    isSkeleton,
+    isLoading,
+    weekStartsOn,
+  } = config
 
   const hours = dayHours()
   const currentHour = new Date().getHours()
@@ -122,7 +128,7 @@ const TimeTableCells = ({
   return (
     <SimpleGrid flex={1} columns={7} gap={gap} position="relative">
       {hours.flatMap((hour) => {
-        return weekDays(date).map((day, _) => (
+        return weekDays(date, weekStartsOn).map((day, _) => (
           <DaysOfHour key={`${day.raw}-${hour.raw}`} hour={hour} day={day} />
         ))
       })}

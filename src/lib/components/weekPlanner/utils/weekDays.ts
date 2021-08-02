@@ -1,4 +1,5 @@
-import { eachDayOfInterval, format, endOfWeek, startOfWeek } from 'date-fns'
+import { eachDayOfInterval, format } from 'date-fns'
+import { startOfWeek, endOfWeek } from './weekHelper'
 
 export interface WeekDay {
   label: string
@@ -6,10 +7,13 @@ export interface WeekDay {
   raw: Date
 }
 
-const weekDays = (date: Date = new Date()): WeekDay[] => {
+const weekDays = (
+  date: Date = new Date(),
+  weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6
+): WeekDay[] => {
   const dates = eachDayOfInterval({
-    start: startOfWeek(date),
-    end: endOfWeek(date),
+    start: startOfWeek(date, weekStartsOn),
+    end: endOfWeek(date, weekStartsOn),
   })
 
   return dates.map((date): WeekDay => {
