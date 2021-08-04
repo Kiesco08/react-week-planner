@@ -5,7 +5,7 @@ export enum MultidayState {
 }
 
 export default interface WeekEvent {
-  id: number
+  id: string
   title: string
   start: Date
   end: Date

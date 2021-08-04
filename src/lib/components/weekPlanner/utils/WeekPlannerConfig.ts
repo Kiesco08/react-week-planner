@@ -18,7 +18,7 @@ export interface DeleteResult {
 }
 
 export interface WeekEventInput extends Omit<WeekEvent, 'id'> {
-  id?: number
+  id?: string
 }
 
 export interface WeekPlannerConfig {
@@ -84,7 +84,7 @@ export const defaultConfig: WeekPlannerConfig = {
       resolve({
         event: {
           ...event,
-          id: event.id ? event.id : Math.random() * 1000 * 1000,
+          id: event.id ? event.id : `${Math.random() * 1000 * 1000}`,
         },
       })
     )
