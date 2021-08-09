@@ -36,6 +36,7 @@ const TimeTable = forwardRef(
             flexDirection="column"
             overflowX="scroll"
             flex={1}
+            backgroundColor="gray.100"
             onScroll={(event) => scrollWeekDays(event.currentTarget.scrollLeft)}
           >
             <Box minWidth={minWidth}>
