@@ -51,6 +51,7 @@ const WeekPlanner: React.FC<WeekPlannerProps> = ({
           date={_date}
           setDate={setDate}
           setWeekStart={setWeekStart}
+          config={config}
         />
         <Spacer height={spacing * 2} />
         <WeekDaysHeader
