@@ -11,4 +11,5 @@ export default interface WeekEvent {
   end: Date
   notes?: string | null
   type: string
+  creatorId?: string
 }

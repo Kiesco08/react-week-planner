@@ -1,6 +1,7 @@
 import { BackgroundProps, LayoutProps } from '@chakra-ui/react'
 import WeekEvent from '../WeekEvent'
 import { Theme } from '@chakra-ui/react'
+import { string } from 'yup/lib/locale'
 
 export interface EventTypeConfig {
   value: string
@@ -37,6 +38,7 @@ export interface WeekPlannerConfig {
   minuteIndicator: boolean
   isSkeleton: boolean
   isLoading: boolean
+  ownerId?: string
 }
 
 export const weekPlannerStrings = {

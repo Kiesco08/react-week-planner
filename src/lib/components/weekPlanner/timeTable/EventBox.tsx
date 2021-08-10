@@ -34,7 +34,7 @@ const EventBox = ({
   onDelete,
   config = defaultConfig,
 }: EventBoxProps) => {
-  const { calendarGripGap, eventTypes } = config
+  const { calendarGripGap, eventTypes, ownerId } = config
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   let backgroundColor = 'gray'
@@ -44,6 +44,13 @@ const EventBox = ({
   if (filteredEventType && filteredEventType.length > 0) {
     const eventType = filteredEventType[0]
     backgroundColor = eventType.colorScheme
+  }
+
+  // Color style
+  let color = 'white'
+  if (event.creatorId && ownerId && event.creatorId !== ownerId) {
+    backgroundColor = `${backgroundColor}.200`
+    color = `${backgroundColor}.800`
   }
 
   const start = new Date(event.start.getTime())
@@ -129,13 +136,12 @@ const EventBox = ({
     >
       <Box
         backgroundColor={backgroundColor}
-        opacity={0.8}
         flex={1}
         rounded="lg"
         padding={height > twentyFiveMin ? 1 : 0}
         paddingX={1}
         margin="1px"
-        color="white"
+        color={color}
         cursor="pointer"
         width="full"
       >
