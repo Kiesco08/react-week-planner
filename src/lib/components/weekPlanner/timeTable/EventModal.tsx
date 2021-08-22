@@ -180,7 +180,7 @@ const EventModal = ({
             }
             if (deleteButton) {
               if (!event.id) return
-              const saveResult = await onDeleteEvent(event.id)
+              const saveResult = await onDeleteEvent(event)
               parseUpdateResults(saveResult, true)
             }
           }}

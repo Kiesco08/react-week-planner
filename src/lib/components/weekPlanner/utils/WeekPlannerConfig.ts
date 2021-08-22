@@ -33,7 +33,7 @@ export interface WeekPlannerConfig {
   minWidth: LayoutProps['minWidth']
   eventTypes: EventTypeConfig[]
   onSaveEvent: (event: WeekEventInput) => Promise<SaveResult>
-  onDeleteEvent: (id: WeekEvent['id']) => Promise<DeleteResult>
+  onDeleteEvent: (event: WeekEventInput) => Promise<DeleteResult>
   toastDurationMilli: number
   minuteIndicator: boolean
   isSkeleton: boolean
@@ -91,11 +91,11 @@ export const defaultConfig: WeekPlannerConfig = {
       })
     )
   },
-  onDeleteEvent: (eventId: WeekEvent['id']) => {
+  onDeleteEvent: (event: WeekEventInput) => {
     console.error(
       `Implement the onDeleteEvent function in WeekPlannerConfig.ts to delete events`
     )
-    return new Promise((resolve) => resolve({ event: { id: eventId } }))
+    return new Promise((resolve) => resolve({ event: { id: event.id! } }))
   },
   eventTypes: [
     {
