@@ -64,6 +64,7 @@ const EventModal = ({
     eventTypes,
     toastDurationMilli,
     onDeleteEvent,
+    willDeleteEvent,
   } = config
   const toast = useToast()
   const strings = weekPlannerStrings
@@ -180,8 +181,15 @@ const EventModal = ({
             }
             if (deleteButton) {
               if (!event.id) return
-              const saveResult = await onDeleteEvent(event)
-              parseUpdateResults(saveResult, true)
+              const doIt = async () => {
+                const saveResult = await onDeleteEvent(event)
+                parseUpdateResults(saveResult, true)
+              }
+              if (willDeleteEvent) {
+                willDeleteEvent(doIt)
+              } else {
+                doIt()
+              }
             }
           }}
           validationSchema={EventSchema}
