@@ -186,7 +186,7 @@ const EventModal = ({
                 parseUpdateResults(saveResult, true)
               }
               if (willDeleteEvent) {
-                willDeleteEvent(doIt)
+                willDeleteEvent(event, doIt)
               } else {
                 doIt()
               }

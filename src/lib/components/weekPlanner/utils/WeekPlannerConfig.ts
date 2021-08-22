@@ -38,7 +38,10 @@ export interface WeekPlannerConfig {
   isSkeleton: boolean
   isLoading: boolean
   ownerId?: string
-  willDeleteEvent?: (completion: () => Promise<void>) => void
+  willDeleteEvent?: (
+    event: WeekEventInput,
+    completion: () => Promise<void>
+  ) => void
 }
 
 export const weekPlannerStrings = {
