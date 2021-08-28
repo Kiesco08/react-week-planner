@@ -36,7 +36,7 @@ import {
   weekPlannerStrings,
 } from '../utils/WeekPlannerConfig'
 import { BiPencil } from 'react-icons/bi'
-import { isBefore } from 'date-fns/esm'
+import { isBefore } from 'date-fns'
 
 interface EventModalProps {
   isOpen: boolean
