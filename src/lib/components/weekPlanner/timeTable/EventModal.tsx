@@ -36,6 +36,7 @@ import {
   weekPlannerStrings,
 } from '../utils/WeekPlannerConfig'
 import { BiPencil } from 'react-icons/bi'
+import { isBefore } from 'date-fns/esm'
 
 interface EventModalProps {
   isOpen: boolean
@@ -168,6 +169,16 @@ const EventModal = ({
             // TODO: loading indicator
             const { title, notes, saveButton, deleteButton, type } = values
             if (saveButton) {
+              if (isBefore(end, start)) {
+                toast({
+                  title: 'Your event start date must be before the end date',
+                  status: 'warning',
+                  duration: toastDurationMilli,
+                  isClosable: true,
+                  position: 'top',
+                })
+                return
+              }
               const eventToSave = {
                 id: event.id,
                 title,
