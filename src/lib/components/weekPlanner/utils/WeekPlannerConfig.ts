@@ -67,6 +67,7 @@ export const weekPlannerStrings = {
   eventSaved: 'Event saved',
   eventDeleted: 'Event deleted',
   unexpectedError: 'Unexpected error',
+  dateRangeWarning: 'Your event start date must be before the end date',
 }
 
 export const defaultConfig: WeekPlannerConfig = {

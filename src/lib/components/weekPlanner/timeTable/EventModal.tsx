@@ -55,8 +55,8 @@ const EventModal = ({
   onDelete,
   config = defaultConfig,
 }: EventModalProps) => {
-  const [start, setStart] = useState(event.start)
-  const [end, setEnd] = useState(event.end)
+  const [start, setStart] = useState(new Date(event.start))
+  const [end, setEnd] = useState(new Date(event.end))
   const [endConfirmed, setEndConfirmed] = useState(true)
   const {
     timeFormats,
@@ -134,8 +134,8 @@ const EventModal = ({
 
   useEffect(() => {
     if (isOpen) return
-    setStart(event.start)
-    setEnd(event.end)
+    setStart(new Date(event.start))
+    setEnd(new Date(event.end))
   }, [event.end, event.start, isOpen])
 
   const formattedEnd = format(end, 'dd-MM-yyyy')
@@ -171,7 +171,7 @@ const EventModal = ({
             if (saveButton) {
               if (isBefore(end, start)) {
                 toast({
-                  title: 'Your event start date must be before the end date',
+                  title: strings.dateRangeWarning,
                   status: 'warning',
                   duration: toastDurationMilli,
                   isClosable: true,
