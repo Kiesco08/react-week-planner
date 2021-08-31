@@ -8,11 +8,24 @@ import {
   Text,
   Flex,
   Spacer,
+  Circle,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
+  Stack,
 } from '@chakra-ui/react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { format, add } from 'date-fns'
 import { startOfWeek } from './utils/weekHelper'
-import { defaultConfig, WeekPlannerConfig } from './utils/WeekPlannerConfig'
+import {
+  defaultConfig,
+  WeekPlannerConfig,
+  weekPlannerStrings,
+} from './utils/WeekPlannerConfig'
+import { BsQuestionCircle } from 'react-icons/bs'
 
 interface DateNavigatorProps {
   date: Date
@@ -27,11 +40,37 @@ const DateNavigator = ({
   setWeekStart,
   config = defaultConfig,
 }: DateNavigatorProps) => {
-  const { weekStartsOn } = config
+  const { weekStartsOn, eventTypes } = config
   const updateDates = (newDate: Date) => {
     setDate(newDate)
     if (setWeekStart) setWeekStart(startOfWeek(newDate, weekStartsOn))
   }
+  const Help = () => (
+    <Popover trigger="hover">
+      <PopoverTrigger>
+        <IconButton
+          aria-label="help"
+          icon={<BsQuestionCircle />}
+          variant="link"
+          size="lg"
+        />
+      </PopoverTrigger>
+      <PopoverContent>
+        <PopoverArrow />
+        <PopoverHeader>{weekPlannerStrings.legend}</PopoverHeader>
+        <PopoverBody>
+          <Stack>
+            {eventTypes.map((eventType) => (
+              <HStack key={eventType.label}>
+                <Circle backgroundColor={eventType.colorScheme} size={4} />
+                <Text>{eventType.label}</Text>
+              </HStack>
+            ))}
+          </Stack>
+        </PopoverBody>
+      </PopoverContent>
+    </Popover>
+  )
   return (
     <Box>
       <Flex>
@@ -45,21 +84,24 @@ const DateNavigator = ({
         <Spacer />
         {/* Date switcher */}
         <HStack>
-          <IconButton
-            aria-label="last-week"
-            icon={<FaChevronLeft />}
-            variant="outline"
-            onClick={() => updateDates(add(date, { weeks: -1 }))}
-          />
-          <Button onClick={() => updateDates(new Date())} variant="outline">
-            Today
-          </Button>
-          <IconButton
-            aria-label="next-week"
-            icon={<FaChevronRight />}
-            variant="outline"
-            onClick={() => updateDates(add(date, { weeks: 1 }))}
-          />
+          <Help />
+          <HStack>
+            <IconButton
+              aria-label="last-week"
+              icon={<FaChevronLeft />}
+              variant="outline"
+              onClick={() => updateDates(add(date, { weeks: -1 }))}
+            />
+            <Button onClick={() => updateDates(new Date())} variant="outline">
+              {weekPlannerStrings.today}
+            </Button>
+            <IconButton
+              aria-label="next-week"
+              icon={<FaChevronRight />}
+              variant="outline"
+              onClick={() => updateDates(add(date, { weeks: 1 }))}
+            />
+          </HStack>
         </HStack>
       </Flex>
     </Box>

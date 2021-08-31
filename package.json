@@ -40,6 +40,7 @@
   },
   "scripts": {
     "start": "tsc -w",
+    "dev": "yarn prepack && cd example && yarn dev",
     "prepack": "rm -rf dist && yarn build:esm && yarn build:cjs && yarn build:types",
     "build:esm": "babel src/lib --extensions .ts,.tsx -d dist/esm --source-maps",
     "build:cjs": "babel src/lib --extensions .ts,.tsx -d dist/cjs --source-maps",
