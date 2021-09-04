@@ -21,6 +21,47 @@ export interface WeekEventInput extends Omit<WeekEvent, 'id'> {
   id?: string
 }
 
+export enum Timezone {
+  minus12 = '-12:00',
+  minus11 = '-11:00',
+  minus10 = '-10:00',
+  minus930 = '-09:30',
+  minus9 = '-09:00',
+  minus8 = '-08:00',
+  minus7 = '-07:00',
+  minus6 = '-06:00',
+  minus5 = '-05:00',
+  minus4 = '-04:00',
+  minus330 = '-03:30',
+  minus3 = '-03:00',
+  minus2 = '-02:00',
+  minus1 = '-01:00',
+  plus0 = '+00:00',
+  plus1 = '+01:00',
+  plus2 = '+02:00',
+  plus3 = '+03:00',
+  plus330 = '+03:30',
+  plus4 = '+04:00',
+  plus430 = '+04:30',
+  plus5 = '+05:00',
+  plus530 = '+05:30',
+  plus545 = '+05:45',
+  plus6 = '+06:00',
+  plus630 = '+06:30',
+  plus7 = '+07:00',
+  plus8 = '+08:00',
+  plus845 = '+08:45',
+  plus9 = '+09:00',
+  plus930 = '+09:30',
+  plus10 = '+10:00',
+  plus1030 = '+10:30',
+  plus11 = '+11:00',
+  plus12 = '+12:00',
+  plus1245 = '+12:45',
+  plus13 = '+13:00',
+  plus14 = '+14:00',
+}
+
 export interface WeekPlannerConfig {
   weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6
   timeslotHeight: number

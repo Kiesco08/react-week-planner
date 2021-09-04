@@ -31,6 +31,7 @@
     "@chakra-ui/react": "^1.6.5",
     "@emotion/styled": "^11.3.0",
     "date-fns": "^2.22.1",
+    "date-fns-tz": "^1.1.6",
     "formik": "^2.2.9",
     "framer-motion": "^4.1.17",
     "react-icons": "^4.2.0",
