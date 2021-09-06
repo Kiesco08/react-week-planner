@@ -1,17 +1,10 @@
 import 'focus-visible/dist/focus-visible'
 import { ChakraProvider } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import {
-  WeekPlanner,
-  EventTypeConfig,
-  defaultConfig,
-  WeekEvent,
-} from 'react-week-planner'
+import React from 'react'
+import { WeekPlanner, EventTypeConfig, defaultConfig } from 'react-week-planner'
 import theme from './theme'
 
 const App: React.FC = () => {
-  const [events, setEvents] = useState<WeekEvent[]>([])
-
   enum EventType {
     Training = 'training',
     Busy = 'busy',
@@ -46,12 +39,7 @@ const App: React.FC = () => {
 
   return (
     <ChakraProvider resetCSS theme={theme}>
-      <WeekPlanner
-        events={events}
-        setEvents={setEvents}
-        setWeekStart={() => {}}
-        config={{ ...defaultConfig, eventTypes, weekStartsOn: 1 }}
-      />
+      <WeekPlanner config={{ ...defaultConfig, eventTypes, weekStartsOn: 1 }} />
     </ChakraProvider>
   )
 }

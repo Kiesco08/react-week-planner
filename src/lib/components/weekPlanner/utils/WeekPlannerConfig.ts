@@ -63,6 +63,8 @@ export enum Timezone {
 }
 
 export interface WeekPlannerConfig {
+  setWeekStart?: (weekStart: Date) => void
+  timezone: Timezone
   weekStartsOn: 0 | 1 | 2 | 3 | 4 | 5 | 6
   timeslotHeight: number
   calendarGripGap: number
@@ -114,6 +116,7 @@ export const weekPlannerStrings = {
 }
 
 export const defaultConfig: WeekPlannerConfig = {
+  timezone: Timezone.plus0,
   weekStartsOn: 0,
   isLoading: false,
   isSkeleton: false,

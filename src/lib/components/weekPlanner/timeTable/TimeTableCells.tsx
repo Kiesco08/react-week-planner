@@ -19,6 +19,7 @@ import {
   isResumingFromPast,
   isStartingThisHour,
 } from '../utils/timeHelper'
+import { utcToZonedTime } from 'date-fns-tz'
 
 interface TimeTableCellsProps {
   date: Date
@@ -42,6 +43,7 @@ const TimeTableCells = ({
     isSkeleton,
     isLoading,
     weekStartsOn,
+    timezone,
   } = config
 
   const hours = dayHours()
@@ -84,7 +86,15 @@ const TimeTableCells = ({
                         const oldEvents = events.filter(
                           (oldEvent) => event.id !== oldEvent.id
                         )
-                        if (setEvents) setEvents([...oldEvents, event])
+                        if (setEvents)
+                          setEvents([
+                            ...oldEvents,
+                            {
+                              ...event,
+                              start: utcToZonedTime(event.start, timezone),
+                              end: utcToZonedTime(event.end, timezone),
+                            },
+                          ])
                       }}
                       onDelete={(eventId) => {
                         if (setEvents)
@@ -113,7 +123,15 @@ const TimeTableCells = ({
                   type: defaultEventType,
                 }}
                 onSave={(event) => {
-                  if (setEvents) setEvents([...events, event])
+                  if (setEvents)
+                    setEvents([
+                      ...events,
+                      {
+                        ...event,
+                        start: utcToZonedTime(event.start, timezone),
+                        end: utcToZonedTime(event.end, timezone),
+                      },
+                    ])
                 }}
                 onDelete={() => {}}
                 config={config}

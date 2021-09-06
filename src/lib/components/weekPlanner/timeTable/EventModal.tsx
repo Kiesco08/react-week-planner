@@ -37,6 +37,7 @@ import {
 } from '../utils/WeekPlannerConfig'
 import { BiPencil } from 'react-icons/bi'
 import { isBefore } from 'date-fns'
+import { zonedTimeToUtc } from 'date-fns-tz'
 
 interface EventModalProps {
   isOpen: boolean
@@ -66,6 +67,7 @@ const EventModal = ({
     toastDurationMilli,
     onDeleteEvent,
     willDeleteEvent,
+    timezone,
   } = config
   const toast = useToast()
   const strings = weekPlannerStrings
@@ -182,8 +184,8 @@ const EventModal = ({
               const eventToSave = {
                 id: event.id,
                 title,
-                start,
-                end,
+                start: zonedTimeToUtc(start, timezone),
+                end: zonedTimeToUtc(end, timezone),
                 notes,
                 type,
               }

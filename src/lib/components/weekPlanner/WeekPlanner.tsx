@@ -5,22 +5,33 @@ import TimeTable from './timeTable/TimeTable'
 import { WeekPlannerConfig, defaultConfig } from './utils/WeekPlannerConfig'
 import WeekDaysHeader from './WeekDaysHeader'
 import WeekEvent from './WeekEvent'
+import { utcToZonedTime } from 'date-fns-tz'
 
 interface WeekPlannerProps {
   config?: WeekPlannerConfig
   events?: WeekEvent[]
-  setEvents?: (events: WeekEvent[]) => void
-  setWeekStart?: (weekStart: Date) => void
 }
 
 const WeekPlanner: React.FC<WeekPlannerProps> = ({
   config = defaultConfig,
   events = [],
-  setEvents,
-  setWeekStart,
 }) => {
-  const [_date, setDate] = useState(new Date())
-  const { calendarGripGap, background, padding, spacing } = config
+  const {
+    calendarGripGap,
+    background,
+    padding,
+    spacing,
+    timezone,
+    setWeekStart,
+  } = config
+  const [_date, setDate] = useState(utcToZonedTime(new Date(), timezone))
+  const [_events, setEvents] = useState(
+    events.map((event) => ({
+      ...event,
+      start: utcToZonedTime(event.start, timezone),
+      end: utcToZonedTime(event.end, timezone),
+    }))
+  )
   const gap = `${calendarGripGap}px`
   const timeTableRef = createRef<HTMLDivElement>()
   const daysViewRef = createRef<HTMLDivElement>()
@@ -66,7 +77,7 @@ const WeekPlanner: React.FC<WeekPlannerProps> = ({
         ref={timeTableRef}
         date={_date}
         gap={gap}
-        events={events}
+        events={_events}
         setEvents={setEvents}
         config={config}
         scrollWeekDays={scrollWeekDays}
