@@ -9,9 +9,18 @@ import {
   weekPlannerStrings,
   EventTypeConfig,
   WeekEvent,
+  Timezone,
+  currentTimezone,
 } from './components/weekPlanner'
 
-export { WeekPlanner, DatePicker, defaultConfig, weekPlannerStrings }
+export {
+  WeekPlanner,
+  DatePicker,
+  defaultConfig,
+  weekPlannerStrings,
+  Timezone,
+  currentTimezone,
+}
 export type {
   EventTypeConfig,
   WeekEvent,

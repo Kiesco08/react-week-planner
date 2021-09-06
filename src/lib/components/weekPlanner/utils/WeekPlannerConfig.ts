@@ -1,6 +1,7 @@
 import { BackgroundProps, LayoutProps } from '@chakra-ui/react'
 import WeekEvent from '../WeekEvent'
 import { Theme } from '@chakra-ui/react'
+import { format } from 'date-fns-tz'
 
 export interface EventTypeConfig {
   value: string
@@ -167,3 +168,6 @@ export const defaultConfig: WeekPlannerConfig = {
   ],
   toastDurationMilli: 3000,
 }
+
+export const currentTimezone: Timezone =
+  Timezone[format(new Date(), 'XXX') as keyof typeof Timezone]
