@@ -2,7 +2,6 @@ import React from 'react'
 import {
   Box,
   Button,
-  Center,
   HStack,
   IconButton,
   Text,
@@ -16,12 +15,15 @@ import {
   PopoverHeader,
   PopoverTrigger,
   Stack,
+  useBreakpointValue,
+  StackDirection,
 } from '@chakra-ui/react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { format, add } from 'date-fns'
 import { startOfWeek } from './utils/weekHelper'
 import {
   defaultConfig,
+  Timezone,
   WeekPlannerConfig,
   weekPlannerStrings,
 } from './utils/WeekPlannerConfig'
@@ -40,7 +42,10 @@ const DateNavigator = ({
   setWeekStart,
   config = defaultConfig,
 }: DateNavigatorProps) => {
-  const { weekStartsOn, eventTypes } = config
+  const { weekStartsOn, eventTypes, timezone } = config
+  const monthFormat = useBreakpointValue({ base: 'MMM', sm: 'MMMM' }) ?? 'MMMM'
+  const direction: StackDirection =
+    useBreakpointValue({ base: 'column', sm: 'row' }) ?? 'row'
   const updateDates = (newDate: Date) => {
     setDate(newDate)
     if (setWeekStart) setWeekStart(startOfWeek(newDate, weekStartsOn))
@@ -75,12 +80,23 @@ const DateNavigator = ({
     <Box>
       <Flex>
         {/* Month Year */}
-        <Center>
+        <Stack direction={direction}>
           <Text fontSize="x-large" fontWeight="semibold">{`${format(
             date,
-            'MMMM'
+            monthFormat
           )} ${format(date, 'yyyy')}`}</Text>
-        </Center>
+          <Text fontSize="sm" color="gray" alignSelf="center">
+            {`GMT${
+              timezone === Timezone.plus0
+                ? ''
+                : timezone.substring(0, 1) + // + or -
+                  parseInt(timezone.substring(1, 3)) + // hours
+                  (timezone.substring(4, 6) === '00'
+                    ? ''
+                    : timezone.substring(3, 6)) // semi-colon + minutes
+            }`}
+          </Text>
+        </Stack>
         <Spacer />
         {/* Date switcher */}
         <HStack>
