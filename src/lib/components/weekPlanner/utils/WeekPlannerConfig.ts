@@ -169,5 +169,4 @@ export const defaultConfig: WeekPlannerConfig = {
   toastDurationMilli: 3000,
 }
 
-export const currentTimezone: Timezone =
-  Timezone[format(new Date(), 'XXX') as keyof typeof Timezone]
+export const currentTimezone: Timezone = format(new Date(), 'XXX') as Timezone
